@@ -3,10 +3,10 @@ package com.example.bepopcorntime.theatre;
 
 import com.example.bepopcorntime.seat.Seat;
 import com.example.bepopcorntime.showtime.Showtime;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,11 +20,9 @@ public class Theatre
     @Column(nullable = false)
     private String name;
 
-    @OneToOne(mappedBy = "theatre")
-    @JsonBackReference
-    private Showtime showtime;
+    @OneToMany(mappedBy = "theatre")  // Changed from @OneToOne
+    private List<Showtime> showtimes = new ArrayList<>();  // Changed from a single Showtime to a List
 
     @OneToMany(mappedBy = "theatre")
-    private List<Seat> seats;
-
+    private List<Seat> seats = new ArrayList<>();
 }

@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 public class AgeLimit
@@ -14,8 +17,8 @@ public class AgeLimit
     private int id;
     private int age;
 
-    @OneToOne(mappedBy = "ageLimit")
+    @OneToMany(mappedBy = "ageLimit")
     @JsonBackReference
-    private Movie movie;
+    private List<Movie> movies = new ArrayList<>();
 }
 

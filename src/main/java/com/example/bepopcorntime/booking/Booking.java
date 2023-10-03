@@ -1,9 +1,11 @@
 package com.example.bepopcorntime.booking;
 
 import com.example.bepopcorntime.booked_seat.BookedSeat;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,5 +20,6 @@ public class Booking
     private String email;
 
     @OneToMany(mappedBy = "booking")
-    private List<BookedSeat> bookedSeats;
+    @JsonBackReference //??
+    private List<BookedSeat> bookedSeats = new ArrayList<>();
 }

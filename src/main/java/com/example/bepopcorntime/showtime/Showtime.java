@@ -2,13 +2,11 @@ package com.example.bepopcorntime.showtime;
 
 
 import com.example.bepopcorntime.movie.Movie;
-import com.example.bepopcorntime.seat.Seat;
 import com.example.bepopcorntime.theatre.Theatre;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -19,7 +17,7 @@ public class Showtime
     private int id;
     private Date timeStart;
 
-    @OneToOne
+    @ManyToOne  // Changed from @OneToOne
     @JoinColumn(name = "theatre_id") // Provide the actual column name in your database
     private Theatre theatre;
 

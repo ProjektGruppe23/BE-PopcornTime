@@ -1,5 +1,7 @@
 package com.example.bepopcorntime.seat;
 
-public interface SeatRepository
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SeatRepository extends JpaRepository<Seat, Integer>
 {
 }
