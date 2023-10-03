@@ -19,7 +19,8 @@ public class Showtime
     private int id;
     private Date timeStart;
 
-    @OneToOne(mappedBy = "theatre")
+    @OneToOne
+    @JoinColumn(name = "theatre_id") // Provide the actual column name in your database
     private Theatre theatre;
 
     @ManyToOne
