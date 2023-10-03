@@ -10,6 +10,8 @@ import com.example.bepopcorntime.genre.Genre;
 import com.example.bepopcorntime.genre.GenreRepository;
 import com.example.bepopcorntime.movie.Movie;
 import com.example.bepopcorntime.movie.MovieRepository;
+import com.example.bepopcorntime.movie_genre.MovieGenre;
+import com.example.bepopcorntime.movie_genre.MovieGenreRepository;
 import com.example.bepopcorntime.seat.Seat;
 import com.example.bepopcorntime.seat.SeatRepository;
 import com.example.bepopcorntime.showtime.Showtime;
@@ -41,6 +43,9 @@ public class InitData
     private BookingRepository bookingRepository;
     @Autowired
     private BookedSeatRepository bookedSeatRepository;
+
+    @Autowired
+    private MovieGenreRepository movieGenreRepository;
 
     @PostConstruct
     public void init()
@@ -119,6 +124,22 @@ public class InitData
         nowPlayingMovie3.setLength(115);
         nowPlayingMovie3.setAgeLimit(ageLimitR);
         movieRepository.save(nowPlayingMovie3);
+
+        // Initialize Movie Genres
+        MovieGenre movieGenre1 = new MovieGenre();
+        movieGenre1.setMovie(upcomingMovie1);
+        movieGenre1.setGenre(action);
+        movieGenreRepository.save(movieGenre1);
+
+        MovieGenre movieGenre2 = new MovieGenre();
+        movieGenre2.setMovie(upcomingMovie1);
+        movieGenre2.setGenre(comedy);
+        movieGenreRepository.save(movieGenre2);
+
+        MovieGenre movieGenre3 = new MovieGenre();
+        movieGenre3.setMovie(upcomingMovie2);
+        movieGenre3.setGenre(action);
+        movieGenreRepository.save(movieGenre3);
 
         // 4. Initialize Theatres
         Theatre theatre1 = new Theatre();
