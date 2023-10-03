@@ -9,13 +9,13 @@ import lombok.Data;
 @Data
 public class AgeLimit
 {
-    @OneToOne(mappedBy = "ageLimit")
-    @JsonBackReference
-    private Movie movie;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int age;
+
+    @OneToOne(mappedBy = "ageLimit")
+    @JsonBackReference
+    private Movie movie;
 }
 

@@ -3,10 +3,12 @@ package com.example.bepopcorntime.seat;
 import com.example.bepopcorntime.booked_seat.BookedSeat;
 import com.example.bepopcorntime.theatre.Theatre;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
+@Data
 public class Seat
 {
 
