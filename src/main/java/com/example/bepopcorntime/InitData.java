@@ -210,5 +210,6 @@ public class InitData
         bookedSeatRepository.save(bookedSeat2);
 
         //SPrint1
+        // Sprint1 test 2
     }
 }
