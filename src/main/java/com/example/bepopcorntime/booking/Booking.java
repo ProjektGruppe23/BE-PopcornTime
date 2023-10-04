@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -21,5 +21,5 @@ public class Booking
 
     @OneToMany(mappedBy = "booking")
     @JsonBackReference //??
-    private List<BookedSeat> bookedSeats = new ArrayList<>();
+    private Set<BookedSeat> bookedSeats = new HashSet<>();
 }

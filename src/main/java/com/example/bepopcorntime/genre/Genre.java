@@ -4,9 +4,7 @@ import com.example.bepopcorntime.movie_genre.MovieGenre;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,5 +18,5 @@ public class Genre
     private String type;
 
     @OneToMany(mappedBy = "genre")
-    private Set<MovieGenre> movieGenreSet = new HashSet<>();
+    private Set<MovieGenre> movieGenres = new HashSet<>();
 }

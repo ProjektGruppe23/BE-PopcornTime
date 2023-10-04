@@ -8,9 +8,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,9 +28,9 @@ public class Movie
     private int length;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
     @JsonBackReference
-    private List<Showtime> showtimes = new ArrayList<>();
+    private Set<Showtime> showtimes = new HashSet<>();
 
     @OneToMany(mappedBy = "movie")
-    private Set<MovieGenre> movieGenreSet = new HashSet<>();
+    private Set<MovieGenre> movieGenres = new HashSet<>();
 
 }

@@ -6,8 +6,8 @@ import com.example.bepopcorntime.showtime.Showtime;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -21,8 +21,8 @@ public class Theatre
     private String name;
 
     @OneToMany(mappedBy = "theatre")  // Changed from @OneToOne
-    private List<Showtime> showtimes = new ArrayList<>();  // Changed from a single Showtime to a List
+    private Set<Showtime> showtimes = new HashSet<>();
 
     @OneToMany(mappedBy = "theatre")
-    private List<Seat> seats = new ArrayList<>();
+    private Set<Seat> seats = new HashSet<>();
 }
