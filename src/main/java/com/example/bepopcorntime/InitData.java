@@ -209,6 +209,6 @@ public class InitData
         bookedSeat2.setShowtime(showtime2);
         bookedSeatRepository.save(bookedSeat2);
 
-        //SPrint1
+        //SPrint1 + LP-43
     }
 }
