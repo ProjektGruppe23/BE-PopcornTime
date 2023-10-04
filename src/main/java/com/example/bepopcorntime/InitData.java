@@ -1,4 +1,4 @@
-package com.example.bepopcorntime;
+/*package com.example.bepopcorntime;
 
 import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.age_limit.AgeLimitRepository;
@@ -24,10 +24,9 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 
-//@Component
+@Component
 public class InitData
 {
-    /*
     @Autowired
     private AgeLimitRepository ageLimitRepository;
     @Autowired
@@ -210,9 +209,5 @@ public class InitData
         bookedSeat2.setShowtime(showtime2);
         bookedSeatRepository.save(bookedSeat2);
 
-        //SPrint1
-        // Sprint1 test 2
     }
-
-     */
-}
+}*/
