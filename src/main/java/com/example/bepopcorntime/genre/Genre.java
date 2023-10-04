@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,5 +20,5 @@ public class Genre
     private String type;
 
     @OneToMany(mappedBy = "genre")
-    private List<MovieGenre> movieGenres = new ArrayList<>();
+    private Set<MovieGenre> movieGenreSet = new HashSet<>();
 }

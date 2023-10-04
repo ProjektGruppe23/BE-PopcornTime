@@ -9,7 +9,9 @@ import lombok.Data;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -31,6 +33,6 @@ public class Movie
     private List<Showtime> showtimes = new ArrayList<>();
 
     @OneToMany(mappedBy = "movie")
-    private List<MovieGenre> movieGenres = new ArrayList<>();
+    private Set<MovieGenre> movieGenreSet = new HashSet<>();
 
 }
