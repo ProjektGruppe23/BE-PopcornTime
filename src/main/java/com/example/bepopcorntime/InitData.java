@@ -24,9 +24,10 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 
-@Component
+//@Component
 public class InitData
 {
+    /*
     @Autowired
     private AgeLimitRepository ageLimitRepository;
     @Autowired
@@ -212,4 +213,6 @@ public class InitData
         //SPrint1
         // Sprint1 test 2
     }
+
+     */
 }
