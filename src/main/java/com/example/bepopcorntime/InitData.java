@@ -208,5 +208,8 @@ public class InitData
         bookedSeat2.setSeat(seat2);
         bookedSeat2.setShowtime(showtime2);
         bookedSeatRepository.save(bookedSeat2);
+
+
+        //Master check
     }
 }
