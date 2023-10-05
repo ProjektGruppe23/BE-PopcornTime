@@ -1,7 +1,8 @@
 package com.example.bepopcorntime.movie;
 
 
-import jakarta.annotation.PostConstruct;
+import com.example.bepopcorntime.genre.Genre;
+import com.example.bepopcorntime.genre.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,9 @@ public class MovieRESTController
 {
     @Autowired
     MovieRepository movieRepository;
+
+    @Autowired
+    GenreRepository genreRepository;
 
     /*@GetMapping("/movies")
     public List<Movie> getAllMovies()
@@ -64,5 +68,11 @@ public class MovieRESTController
     {
         List<Movie> moviesByGenre = movieRepository.findByMovieGenres_Genre_Id(genreId);
         return moviesByGenre;
+    }
+
+    @GetMapping("/genres")
+    public List<Genre> getAllGenres()
+    {
+        return genreRepository.findAll();
     }
 }

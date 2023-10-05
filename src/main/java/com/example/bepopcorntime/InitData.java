@@ -1,4 +1,4 @@
-package com.example.bepopcorntime;
+/*package com.example.bepopcorntime;
 
 import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.age_limit.AgeLimitRepository;
@@ -69,11 +69,11 @@ public class InitData
         genreRepository.save(comedy);
 
         Genre horror = new Genre();
-        comedy.setType("Horror");
+        horror.setType("Horror");
         genreRepository.save(horror);
 
         Genre fantasy = new Genre();
-        comedy.setType("Fantasy");
+        fantasy.setType("Fantasy");
         genreRepository.save(fantasy);
 
         // 3. Initialize Movies
@@ -238,4 +238,4 @@ public class InitData
         bookedSeatRepository.save(bookedSeat2);
 
     }
-}
+}*/
