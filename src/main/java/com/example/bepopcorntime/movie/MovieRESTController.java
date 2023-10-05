@@ -59,12 +59,10 @@ public class MovieRESTController
         return selectedMovies;
     }
 
-    @GetMapping("/movies/byGenre/{genreId}")
+    @GetMapping("/movies/{genreId}")
     public List<Movie> getMoviesByGenre(@PathVariable int genreId)
     {
         List<Movie> moviesByGenre = movieRepository.findByMovieGenres_Genre_Id(genreId);
         return moviesByGenre;
     }
-
-
 }
