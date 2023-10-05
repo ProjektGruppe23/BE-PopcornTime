@@ -18,6 +18,11 @@ public class MovieRESTController
     @Autowired
     MovieRepository movieRepository;
 
+    /*@GetMapping("/movies")
+    public List<Movie> getAllMovies()
+    {
+        return movieRepository.findAll();
+    }*/
 
     @GetMapping("/movies/current")
     public List<Movie> getCurrentMovies()
