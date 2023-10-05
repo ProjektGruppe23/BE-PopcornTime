@@ -1,4 +1,4 @@
-package com.example.bepopcorntime;
+/*package com.example.bepopcorntime;
 
 import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.age_limit.AgeLimitRepository;
@@ -212,4 +212,4 @@ public class InitData
         //SPrint1
         // Sprint1 test 2
     }
-}
+}*/
