@@ -1,4 +1,4 @@
-/*package com.example.bepopcorntime;
+package com.example.bepopcorntime;
 
 import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.age_limit.AgeLimitRepository;
@@ -67,6 +67,14 @@ public class InitData
         Genre comedy = new Genre();
         comedy.setType("Comedy");
         genreRepository.save(comedy);
+
+        Genre horror = new Genre();
+        comedy.setType("Horror");
+        genreRepository.save(horror);
+
+        Genre fantasy = new Genre();
+        comedy.setType("Fantasy");
+        genreRepository.save(fantasy);
 
         // 3. Initialize Movies
         // Upcoming Movies
@@ -141,6 +149,26 @@ public class InitData
         movieGenre3.setGenre(action);
         movieGenreRepository.save(movieGenre3);
 
+        MovieGenre movieGenre4 = new MovieGenre();
+        movieGenre4.setMovie(upcomingMovie3);
+        movieGenre4.setGenre(horror);
+        movieGenreRepository.save(movieGenre4);
+
+        MovieGenre movieGenre5 = new MovieGenre();
+        movieGenre5.setMovie(nowPlayingMovie1);
+        movieGenre5.setGenre(action);
+        movieGenreRepository.save(movieGenre5);
+
+        MovieGenre movieGenre6 = new MovieGenre();
+        movieGenre6.setMovie(nowPlayingMovie2);
+        movieGenre6.setGenre(comedy);
+        movieGenreRepository.save(movieGenre6);
+
+        MovieGenre movieGenre7 = new MovieGenre();
+        movieGenre7.setMovie(nowPlayingMovie3);
+        movieGenre7.setGenre(fantasy);
+        movieGenreRepository.save(movieGenre7);
+
         // 4. Initialize Theatres
         Theatre theatre1 = new Theatre();
         theatre1.setName("Theatre 1");
@@ -210,4 +238,4 @@ public class InitData
         bookedSeatRepository.save(bookedSeat2);
 
     }
-}*/
+}
