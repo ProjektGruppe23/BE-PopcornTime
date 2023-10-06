@@ -7,8 +7,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class MovieGenre
-{
+public class MovieGenre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

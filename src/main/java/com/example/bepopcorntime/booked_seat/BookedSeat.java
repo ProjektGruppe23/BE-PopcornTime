@@ -8,8 +8,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class BookedSeat
-{
+public class BookedSeat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

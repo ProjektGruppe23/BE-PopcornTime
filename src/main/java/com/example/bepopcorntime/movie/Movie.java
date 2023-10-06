@@ -1,7 +1,6 @@
 package com.example.bepopcorntime.movie;
 
 import com.example.bepopcorntime.age_limit.AgeLimit;
-import com.example.bepopcorntime.genre.Genre;
 import com.example.bepopcorntime.movie_genre.MovieGenre;
 import com.example.bepopcorntime.showtime.Showtime;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -9,15 +8,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Data
-public class Movie
-{
+public class Movie {
     @ManyToOne
     @JoinColumn(name = "ageLimit", referencedColumnName = "id", nullable = false)
     AgeLimit ageLimit;
@@ -37,7 +33,6 @@ public class Movie
     @OneToMany(mappedBy = "movie")
     @JsonBackReference
     private Set<MovieGenre> movieGenres = new HashSet<>();
-
 
 
 }
