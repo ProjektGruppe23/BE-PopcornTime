@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -32,13 +31,20 @@ public class bookedSeatRESTController
         return new ResponseEntity<>(listOfBookedSeats, HttpStatus.OK);
     }
 
-    /*
+
     @GetMapping("/getMovieDetails")
     public ResponseEntity<List<Movie>>  getMovieDetails(Session session)
     {
-        List<Movie> listOfMovieDetails = session.get(all);
+        Movie movie = new Movie();
+        movie.setTitle("Halløj fra badehotellet");
+        movie.setPicture("https://image.tmdb.org/t/p/w500/xtQQ839N83ThumSLn2NiFp9O70C.jpg");
+        movie.setLength(177);
+        movie.setStartDate(new java.sql.Date(2021, 10, 10));
+        movie.setEndDate(new java.sql.Date(2022, 10, 10));
+        List<Movie> listOfMovieDetails = new ArrayList<>();
+        listOfMovieDetails.add(movie);
         return new ResponseEntity<>(listOfMovieDetails, HttpStatus.OK);
     }
 
-    */
+
 }
