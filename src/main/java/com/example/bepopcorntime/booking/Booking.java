@@ -10,8 +10,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Booking
-{
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

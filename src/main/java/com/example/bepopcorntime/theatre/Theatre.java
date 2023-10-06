@@ -11,8 +11,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Theatre
-{
+public class Theatre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

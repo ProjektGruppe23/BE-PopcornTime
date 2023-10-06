@@ -13,8 +13,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Movie
-{
+public class Movie {
     @ManyToOne
     @JoinColumn(name = "ageLimit", referencedColumnName = "id", nullable = false)
     AgeLimit ageLimit;
@@ -22,6 +21,7 @@ public class Movie
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
+    private String description;
     private Date startDate;
     private Date endDate;
     private String picture;
@@ -31,6 +31,6 @@ public class Movie
     private Set<Showtime> showtimes = new HashSet<>();
 
     @OneToMany(mappedBy = "movie")
+    @JsonBackReference
     private Set<MovieGenre> movieGenres = new HashSet<>();
-
 }

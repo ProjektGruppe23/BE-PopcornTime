@@ -1,6 +1,5 @@
 package com.example.bepopcorntime.theatre;
 
-public class TheatreRESTController
-{
+public class TheatreRESTController {
 
 }

@@ -2,6 +2,8 @@ package com.example.bepopcorntime.showtime;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ShowtimeRepository extends JpaRepository<Showtime, Integer>
-{
+import java.util.List;
+
+public interface ShowtimeRepository extends JpaRepository<Showtime, Integer> {
+    List<Showtime> findShowtimesByMovieId(int movieId);
 }
