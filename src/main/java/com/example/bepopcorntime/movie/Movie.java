@@ -11,6 +11,7 @@ import lombok.Data;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,17 +25,19 @@ public class Movie
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
+    private String description;
     private Date startDate;
     private Date endDate;
     private String picture;
     private int length;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
-    //@JsonBackReference
+    @JsonBackReference
     private Set<Showtime> showtimes = new HashSet<>();
 
     @OneToMany(mappedBy = "movie")
-    //@JsonBackReference
+    @JsonBackReference
     private Set<MovieGenre> movieGenres = new HashSet<>();
+
 
 
 }
