@@ -22,7 +22,6 @@ public class MovieRESTController {
     @Autowired
     MovieGenreRepository movieGenreRepository;
 
-
     @GetMapping("/selectedmovie/{movieid}")
     public ResponseEntity<Movie> getSelectedMovie(@PathVariable int movieid, HttpSession session) {
         Optional<Movie> movieOpt = movieRepository.findById(movieid);
@@ -44,6 +43,4 @@ public class MovieRESTController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
 }

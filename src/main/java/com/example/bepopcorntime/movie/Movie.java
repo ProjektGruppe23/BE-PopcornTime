@@ -33,6 +33,4 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     @JsonBackReference
     private Set<MovieGenre> movieGenres = new HashSet<>();
-
-
 }
