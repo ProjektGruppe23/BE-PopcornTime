@@ -17,12 +17,12 @@ public class ShowtimeRESTController {
     @GetMapping("/showtimes/{movieid}")
     public List<String> getShowtimesByMovieId(@PathVariable int movieid, HttpSession session) {
         List<Showtime> showtimesByMovie = showtimeRepository.findShowtimesByMovieId(movieid);
-        List<String> timeStarts = new ArrayList<>();
+        List<String> time_starts = new ArrayList<>();
         for (Showtime showtime : showtimesByMovie) {
-            timeStarts.add(showtime.getTimeStart());
+            time_starts.add(showtime.getTime_start());
         }
 
-        session.setAttribute("showtimes", timeStarts);
-        return timeStarts;
+        session.setAttribute("showtimes", time_starts);
+        return time_starts;
     }
 }

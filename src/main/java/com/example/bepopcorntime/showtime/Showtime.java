@@ -12,7 +12,7 @@ public class Showtime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String timeStart;
+    private String time_start;
 
     @ManyToOne  // Changed from @OneToOne
     @JoinColumn(name = "theatre_id") // Provide the actual column name in your database
