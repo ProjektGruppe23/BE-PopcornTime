@@ -27,7 +27,7 @@ public class bookedSeatRESTController
     @GetMapping("/getBookedSeats")
     public ResponseEntity<List<BookedSeat>> getBookedSeats(Session session)
     {
-        List<BookedSeat> listOfBookedSeats = bookedSeatRepository.findBookedSeatByShowtime_Id(1); //session.get(showTimeId);
+        List<BookedSeat> listOfBookedSeats = bookedSeatRepository.findBookedSeatByShowtime_Id(2); //session.get(showTimeId);
         return new ResponseEntity<>(listOfBookedSeats, HttpStatus.OK);
     }
 
