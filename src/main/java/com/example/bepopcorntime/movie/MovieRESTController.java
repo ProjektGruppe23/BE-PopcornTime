@@ -66,10 +66,10 @@ public class MovieRESTController
         return selectedMovies;
     }
 
-    @GetMapping("/selectedmovie/{movieid}")
-    public ResponseEntity<Movie> getSelectedMovie(@PathVariable int movieid, HttpSession session)
+    @GetMapping("/movie/{movieId}")
+    public ResponseEntity<Movie> getSelectedMovie(@PathVariable int movieId, HttpSession session)
     {
-        Optional<Movie> movieOpt = movieRepository.findById(movieid);
+        Optional<Movie> movieOpt = movieRepository.findById(movieId);
 
         if ( movieOpt.isPresent() )
         {
