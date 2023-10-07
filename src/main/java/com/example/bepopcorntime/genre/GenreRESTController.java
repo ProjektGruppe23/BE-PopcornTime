@@ -1,6 +1,7 @@
 package com.example.bepopcorntime.genre;
 
 import com.example.bepopcorntime.movie.Movie;
+import com.example.bepopcorntime.movie.MovieRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,6 +18,9 @@ public class GenreRESTController
 {
     @Autowired
     GenreRepository genreRepository;
+
+    @Autowired
+    MovieRepository movieRepository;
 
     @GetMapping("/genres")
     public List<Genre> getAllMovies()
@@ -37,4 +41,5 @@ public class GenreRESTController
         session.setAttribute("genres", genres);
         return genres;
     }
+
 }

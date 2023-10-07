@@ -66,6 +66,20 @@ public class MovieRESTController
         return selectedMovies;
     }
 
+    @GetMapping("/movies/{genreId}")
+    public List<Movie> getMoviesByGenreId(@PathVariable int genreId, HttpSession session)
+    {
+        // Using the repository method to find movies by genre
+        List<Movie> moviesByGenre = movieRepository.findByMovieGenres_Genre_Id(genreId);
+
+        // Do any additional operations or filtering if needed
+
+        // Storing the result in session if required
+        session.setAttribute("movies", moviesByGenre);
+
+        return moviesByGenre;
+    }
+
     @GetMapping("/movie/{movieId}")
     public ResponseEntity<Movie> getSelectedMovie(@PathVariable int movieId, HttpSession session)
     {
