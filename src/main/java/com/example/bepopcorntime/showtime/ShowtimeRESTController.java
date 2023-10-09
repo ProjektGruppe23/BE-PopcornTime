@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -30,6 +31,23 @@ public class ShowtimeRESTController {
 
         session.setAttribute("showtimes", time_starts);
         return time_starts;
+    }
+
+    @GetMapping("oneshowtime/{showtimeId}")
+    public ResponseEntity<Showtime> getOneShowtime(@PathVariable int showtimeId, HttpSession session)
+    {
+        Optional<Showtime> showtimeOpt = showtimeRepository.findShowtimeById(showtimeId);
+
+        if (showtimeOpt.isPresent())
+        {
+            Showtime showtime = showtimeOpt.get();
+            session.setAttribute("showtimeId", showtime.getId());
+            return ResponseEntity.ok(showtime);
+        }
+        else
+        {
+            return ResponseEntity.notFound().build();
+        }
     }
     
 }

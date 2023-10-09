@@ -40,7 +40,9 @@ public class bookedSeatRESTController
         if(showtimeOpt.isPresent())
         {
             Showtime showtime = showtimeOpt.get();
-            
+            session.setAttribute("movieId", showtime.getMovie().getId());
+            session.setAttribute("showtimeId", showtime.getId());
+            session.setAttribute("time_start", showtime.getTime_start());
             
         }
         

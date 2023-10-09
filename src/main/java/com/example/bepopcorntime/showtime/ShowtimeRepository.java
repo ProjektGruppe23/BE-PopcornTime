@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ShowtimeRepository extends JpaRepository<Showtime, Integer> {
     List<Showtime> findShowtimesByMovieId(int movieId);
-    List<Showtime> findShowtimeByMovieIdAndTimeStart(int movieId, Date TimeStart);
+    //List<Showtime> findShowtimeByMovieIdAndTimeStart(int movieId, Date time_start);
     
-    Optional<Showtime> findShowtimeById(int showtimeId);
+    Optional<Showtime> findShowtimeById(int id);
 }
