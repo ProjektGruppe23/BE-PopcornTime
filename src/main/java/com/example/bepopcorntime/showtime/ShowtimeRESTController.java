@@ -1,6 +1,7 @@
 package com.example.bepopcorntime.showtime;
 
 import com.example.bepopcorntime.booked_seat.BookedSeat;
+import com.example.bepopcorntime.movie.Movie;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class ShowtimeRESTController {
     @Autowired
     ShowtimeRepository showtimeRepository;
 
-    @GetMapping("/showtimes/{movieid}")
+    /*@GetMapping("/showtimes/{movieid}")
     public List<Date> getShowtimesByMovieId(@PathVariable int movieid, HttpSession session) {
         List<Showtime> showtimesByMovie = showtimeRepository.findShowtimesByMovieId(movieid);
         List<Date> time_starts = new ArrayList<>();
@@ -31,6 +32,41 @@ public class ShowtimeRESTController {
 
         session.setAttribute("showtimes", time_starts);
         return time_starts;
+    }*/
+
+    /*@GetMapping("/showtimes/{movieid}")
+    public List<Showtime> getShowtimesByMovieId(@PathVariable int movieid, HttpSession session) {
+        List<Showtime> showtimesByMovie = showtimeRepository.findShowtimesByMovieId(movieid);
+        List<Showtime> showtimes = new ArrayList<>();
+
+        for (Showtime showtime : showtimesByMovie) {
+            Showtime showtime1 = new Showtime();
+            showtime1.setId(showtime.getId()); // Assuming getId() returns the ID
+            showtime1.setTime_start(showtime.getTime_start()); // Assuming getTime_start() returns the Date
+            showtimes.add(showtime1);
+        }
+
+        session.setAttribute("showtimes", showtimes);
+        return showtimes;
+    }*/
+
+    @GetMapping("/showtimes/{movieid}")
+    public List<Showtime> getShowtimesByMovieId(@PathVariable int movieid, HttpSession session) {
+        List<Showtime> showtimesByMovie = showtimeRepository.findShowtimesByMovieId(movieid);
+        List<Showtime> showtimes = new ArrayList<>();
+
+        for (Showtime showtime : showtimesByMovie) {
+            // Assuming showtime already contains a reference to the associated Movie
+            Movie movie = showtime.getMovie();
+
+            // You can access the movieId from the associated Movie object
+            int movieId = movie.getId();
+
+            showtimes.add(showtime);
+        }
+
+        session.setAttribute("showtimes", showtimes);
+        return showtimes;
     }
 
     @GetMapping("oneshowtime/{showtimeId}")
