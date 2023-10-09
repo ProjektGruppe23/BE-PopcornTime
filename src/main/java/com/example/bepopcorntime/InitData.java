@@ -1,4 +1,4 @@
-package com.example.bepopcorntime;
+/*package com.example.bepopcorntime;
 
 import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.age_limit.AgeLimitRepository;
@@ -209,7 +209,4 @@ public class InitData
         bookedSeat2.setShowtime(showtime2);
         bookedSeatRepository.save(bookedSeat2);
 
-
-        //Master check
-    }
-}
+}*/

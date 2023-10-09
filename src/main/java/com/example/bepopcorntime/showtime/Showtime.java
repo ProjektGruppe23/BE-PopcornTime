@@ -6,16 +6,16 @@ import com.example.bepopcorntime.theatre.Theatre;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Data
-public class Showtime
-{
+public class Showtime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date timeStart;
+    @Temporal(TemporalType.TIMESTAMP)  // Timestamp includes date and time down to the second second.
+    private Date time_start;
 
     @ManyToOne  // Changed from @OneToOne
     @JoinColumn(name = "theatre_id") // Provide the actual column name in your database

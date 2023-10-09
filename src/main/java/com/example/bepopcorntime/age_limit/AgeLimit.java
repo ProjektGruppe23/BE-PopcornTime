@@ -10,8 +10,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class AgeLimit
-{
+public class AgeLimit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

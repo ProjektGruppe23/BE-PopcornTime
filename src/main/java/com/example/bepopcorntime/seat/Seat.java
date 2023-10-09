@@ -10,8 +10,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Seat
-{
+public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
