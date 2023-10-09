@@ -2,12 +2,17 @@ package com.example.bepopcorntime.booked_seat;
 
 import com.example.bepopcorntime.movie.Movie;
 import com.example.bepopcorntime.movie.MovieRESTController;
+import com.example.bepopcorntime.showtime.Showtime;
+import com.example.bepopcorntime.showtime.ShowtimeRepository;
+import jakarta.servlet.http.HttpSession;
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -23,17 +28,29 @@ public class bookedSeatRESTController
     @Autowired
     MovieRESTController movieRESTController;
 
+    @Autowired
+    ShowtimeRepository showtimeRepository;
 
-    @GetMapping("/getBookedSeats")
-    public ResponseEntity<List<BookedSeat>> getBookedSeats(Session session)
+
+    @GetMapping("/getBookedSeats/{showtime_Id}")
+    public ResponseEntity<List<BookedSeat>> getBookedSeats(@PathVariable int showtime_Id, HttpSession session)
     {
-        List<BookedSeat> listOfBookedSeats = bookedSeatRepository.findBookedSeatByShowtime_Id(2); //session.get(showTimeId);
+        Optional<Showtime> showtimeOpt = showtimeRepository.findShowtimeById(showtime_Id);
+        
+        if(showtimeOpt.isPresent())
+        {
+            Showtime showtime = showtimeOpt.get();
+            
+            
+        }
+        
+        List<BookedSeat> listOfBookedSeats = bookedSeatRepository.findBookedSeatByShowtime_Id(showtime_Id);
         return new ResponseEntity<>(listOfBookedSeats, HttpStatus.OK);
     }
 
 
-    @GetMapping("/getMovieDetails")
-    public ResponseEntity<List<Movie>>  getMovieDetails(Session session)
+    /*@GetMapping("/getMovieDetails")
+    public ResponseEntity<List<Movie>>  getMovieDetails(HttpSession session)
     {
         Movie movie = new Movie();
         movie.setTitle("Halløj fra badehotellet");
@@ -44,7 +61,7 @@ public class bookedSeatRESTController
         List<Movie> listOfMovieDetails = new ArrayList<>();
         listOfMovieDetails.add(movie);
         return new ResponseEntity<>(listOfMovieDetails, HttpStatus.OK);
-    }
+    }*/
 
 
 }
