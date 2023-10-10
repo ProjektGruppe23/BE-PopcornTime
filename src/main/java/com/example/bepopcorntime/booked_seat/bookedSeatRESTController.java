@@ -1,7 +1,11 @@
 package com.example.bepopcorntime.booked_seat;
 
+import com.example.bepopcorntime.booking.Booking;
+import com.example.bepopcorntime.booking.BookingRepository;
 import com.example.bepopcorntime.movie.Movie;
 import com.example.bepopcorntime.movie.MovieRESTController;
+import com.example.bepopcorntime.seat.Seat;
+import com.example.bepopcorntime.seat.SeatRepository;
 import com.example.bepopcorntime.showtime.Showtime;
 import com.example.bepopcorntime.showtime.ShowtimeRepository;
 import jakarta.servlet.http.HttpSession;
@@ -10,10 +14,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -31,6 +32,12 @@ public class bookedSeatRESTController
     @Autowired
     ShowtimeRepository showtimeRepository;
 
+    @Autowired
+    BookingRepository bookingRepository;
+
+   @Autowired
+    SeatRepository seatRepository;
+
 
     @GetMapping("/getBookedSeats/{showtime_Id}")
     public ResponseEntity<List<BookedSeat>> getBookedSeats(@PathVariable int showtime_Id, HttpSession session)
@@ -43,27 +50,57 @@ public class bookedSeatRESTController
             session.setAttribute("movieId", showtime.getMovie().getId());
             session.setAttribute("showtimeId", showtime.getId());
             session.setAttribute("time_start", showtime.getTime_start());
-            
         }
-        
         List<BookedSeat> listOfBookedSeats = bookedSeatRepository.findBookedSeatByShowtime_Id(showtime_Id);
         return new ResponseEntity<>(listOfBookedSeats, HttpStatus.OK);
     }
 
-
-    /*@GetMapping("/getMovieDetails")
-    public ResponseEntity<List<Movie>>  getMovieDetails(HttpSession session)
+    @PostMapping("/getBookedSeats")
+    public ResponseEntity<BookedSeat> postShowtimeIdAndSeatIdAndBookingId(@RequestParam(name = "email") String email,
+                                                                          @RequestParam(name = "arrayParam") List<Integer> seatIds,
+                                                                          @RequestParam(name = "intParam") int showtimeId)
     {
-        Movie movie = new Movie();
-        movie.setTitle("Halløj fra badehotellet");
-        movie.setPicture("https://image.tmdb.org/t/p/w500/xtQQ839N83ThumSLn2NiFp9O70C.jpg");
-        movie.setLength(177);
-        movie.setStartDate(new java.sql.Date(2021, 10, 10));
-        movie.setEndDate(new java.sql.Date(2022, 10, 10));
-        List<Movie> listOfMovieDetails = new ArrayList<>();
-        listOfMovieDetails.add(movie);
-        return new ResponseEntity<>(listOfMovieDetails, HttpStatus.OK);
-    }*/
+        Booking booking = new Booking();
+        booking.setEmail(email);
+        bookingRepository.save(booking);
 
+        BookedSeat savedBookedSeat = new BookedSeat();
+
+        int bookingId = booking.getId(); // Retrieve the booking ID after saving
+
+        Showtime showtime = showtimeRepository.findById(showtimeId).orElse(null);
+
+
+
+        if (showtimeId == 0)
+        {
+            System.out.println("showtime if");
+            // Handle the case where the showtime with the given ID does not exist.
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        for (Integer seatId : seatIds)
+        {
+            Seat seat = seatRepository.findById(seatId).orElse(null);
+
+            if (seatId == 0)
+            {
+                System.out.println("seat if");
+                // Handle the case where the seat with the given ID does not exist.
+                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+            BookedSeat bookedSeat = new BookedSeat();
+            bookedSeat.setBooking(booking);
+            bookedSeat.setSeat(seat);
+            bookedSeat.setShowtime(showtime);
+            savedBookedSeat = bookedSeatRepository.save(bookedSeat);
+
+
+        }
+
+        return new ResponseEntity<>(savedBookedSeat, HttpStatus.CREATED);
+    }
 
 }
+

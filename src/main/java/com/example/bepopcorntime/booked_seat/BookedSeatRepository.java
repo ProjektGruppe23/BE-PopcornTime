@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface BookedSeatRepository extends JpaRepository<BookedSeat, Integer>
 {
     List<BookedSeat> findBookedSeatByShowtime_Id(int showtimeData);
+
+
 }
