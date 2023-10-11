@@ -20,10 +20,6 @@ public class Booking {
     private String email;
 
     @OneToMany(mappedBy = "booking")
-<<<<<<< Updated upstream
-    @JsonBackReference //??
-=======
     @JsonManagedReference(value = "booking-bookedSeat")
->>>>>>> Stashed changes
     private Set<BookedSeat> bookedSeats = new HashSet<>();
 }
