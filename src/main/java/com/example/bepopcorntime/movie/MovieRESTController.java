@@ -1,6 +1,8 @@
 package com.example.bepopcorntime.movie;
 
 
+import com.example.bepopcorntime.age_limit.AgeLimit;
+import com.example.bepopcorntime.age_limit.AgeLimitRepository;
 import com.example.bepopcorntime.movie_genre.MovieGenreRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class MovieRESTController
 
     @Autowired
     MovieGenreRepository movieGenreRepository;
+
+    @Autowired
+    AgeLimitRepository ageLimitRepository;
 
 
     /*@GetMapping("/movies")
@@ -98,8 +103,12 @@ public class MovieRESTController
     }
 
     @PostMapping("/movie")
-    public Movie createMovie(@RequestBody Movie movie)
-    {
+    public Movie createMovie(@RequestBody Movie movie) throws Exception {  // Added Exception for demo
+        int ageLimitId = movie.getAgeLimit().getId(); // assuming you're sending AgeLimit ID from client-side
+        AgeLimit existingAgeLimit = ageLimitRepository.findById(ageLimitId)
+                .orElseThrow(() -> new Exception("AgeLimit not found")); // replace Exception with your custom one
+        movie.setAgeLimit(existingAgeLimit);
+
         return movieRepository.save(movie);
     }
 

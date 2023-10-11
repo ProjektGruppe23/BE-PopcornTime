@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 public class Movie
 {
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ageLimit", referencedColumnName = "id")
     AgeLimit ageLimit;
     @Id
