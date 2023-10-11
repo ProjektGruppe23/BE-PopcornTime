@@ -2,6 +2,7 @@ package com.example.bepopcorntime.movie_genre;
 
 import com.example.bepopcorntime.genre.Genre;
 import com.example.bepopcorntime.movie.Movie;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,9 +15,11 @@ public class MovieGenre {
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)
+    @JsonBackReference(value = "movie-genre")
     private Movie movie;
 
     @ManyToOne
     @JoinColumn(name = "genre_id", nullable = false)
+    @JsonBackReference(value = "genre-movieGenre")
     private Genre genre;
 }

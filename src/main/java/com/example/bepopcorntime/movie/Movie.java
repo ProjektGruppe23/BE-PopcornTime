@@ -4,6 +4,7 @@ import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.movie_genre.MovieGenre;
 import com.example.bepopcorntime.showtime.Showtime;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -26,11 +27,20 @@ public class Movie {
     private Date endDate;
     private String picture;
     private int length;
+<<<<<<< Updated upstream
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
     @JsonBackReference
     private Set<Showtime> showtimes = new HashSet<>();
 
     @OneToMany(mappedBy = "movie")
     @JsonBackReference
+=======
+    @OneToMany(mappedBy = "movie")
+    @JsonManagedReference(value = "movie-showtime")
+    private Set<Showtime> showtimes = new HashSet<>();
+
+    @OneToMany(mappedBy = "movie")
+    @JsonManagedReference(value = "movie-genre")
+>>>>>>> Stashed changes
     private Set<MovieGenre> movieGenres = new HashSet<>();
 }
