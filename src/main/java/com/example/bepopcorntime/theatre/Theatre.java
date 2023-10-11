@@ -3,6 +3,7 @@ package com.example.bepopcorntime.theatre;
 
 import com.example.bepopcorntime.seat.Seat;
 import com.example.bepopcorntime.showtime.Showtime;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,8 +21,10 @@ public class Theatre {
     private String name;
 
     @OneToMany(mappedBy = "theatre")  // Changed from @OneToOne
+    @JsonManagedReference(value = "theatre-showtime")
     private Set<Showtime> showtimes = new HashSet<>();
 
     @OneToMany(mappedBy = "theatre")
+    @JsonManagedReference(value = "theatre-seat")
     private Set<Seat> seats = new HashSet<>();
 }

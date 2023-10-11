@@ -2,6 +2,7 @@ package com.example.bepopcorntime.booking;
 
 import com.example.bepopcorntime.booked_seat.BookedSeat;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,6 +20,6 @@ public class Booking {
     private String email;
 
     @OneToMany(mappedBy = "booking")
-    @JsonBackReference //??
+    @JsonManagedReference(value = "booking-bookedSeat")
     private Set<BookedSeat> bookedSeats = new HashSet<>();
 }
