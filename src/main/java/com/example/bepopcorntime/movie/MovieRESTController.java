@@ -102,4 +102,17 @@ public class MovieRESTController
     {
         return movieRepository.save(movie);
     }
+
+    @PutMapping("/movie/{id}")
+    public Movie updateMovie(@PathVariable int id, @RequestBody Movie movie)
+    {
+        movie.setId(id);
+        return movieRepository.save(movie);
+    }
+
+    @DeleteMapping("/movie/{id}")
+    public void deleteMovie(@PathVariable int id)
+    {
+        movieRepository.deleteById(id);
+    }
 }

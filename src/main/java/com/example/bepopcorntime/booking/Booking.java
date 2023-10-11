@@ -10,7 +10,8 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Booking {
+public class Booking
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,6 +20,5 @@ public class Booking {
     private String email;
 
     @OneToMany(mappedBy = "booking")
-    @JsonBackReference //??
     private Set<BookedSeat> bookedSeats = new HashSet<>();
 }

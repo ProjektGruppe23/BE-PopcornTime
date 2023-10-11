@@ -1,6 +1,5 @@
 package com.example.bepopcorntime.genre;
 
-import com.example.bepopcorntime.movie.Movie;
 import com.example.bepopcorntime.movie.MovieRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

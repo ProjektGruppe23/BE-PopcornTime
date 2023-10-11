@@ -1,4 +1,5 @@
 package com.example.bepopcorntime.seat;
 
-public class SeatRESTController {
+public class SeatRESTController
+{
 }

@@ -13,15 +13,18 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class ShowtimeRESTController {
+public class ShowtimeRESTController
+{
     @Autowired
     ShowtimeRepository showtimeRepository;
 
     @GetMapping("/showtimes/{movieid}")
-    public List<Date> getShowtimesByMovieId(@PathVariable int movieid, HttpSession session) {
+    public List<Date> getShowtimesByMovieId(@PathVariable int movieid, HttpSession session)
+    {
         List<Showtime> showtimesByMovie = showtimeRepository.findShowtimesByMovieId(movieid);
         List<Date> time_starts = new ArrayList<>();
-        for (Showtime showtime : showtimesByMovie) {
+        for ( Showtime showtime : showtimesByMovie )
+        {
             time_starts.add(showtime.getTime_start());
         }
 

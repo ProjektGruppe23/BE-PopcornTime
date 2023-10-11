@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-public class AgeLimitRESTController {
+public class AgeLimitRESTController
+{
 
 }

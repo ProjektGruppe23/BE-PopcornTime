@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -33,7 +34,7 @@ public class bookedSeatRESTController
 
 
     @GetMapping("/getMovieDetails")
-    public ResponseEntity<List<Movie>>  getMovieDetails(Session session)
+    public ResponseEntity<List<Movie>> getMovieDetails(Session session)
     {
         Movie movie = new Movie();
         movie.setTitle("Halløj fra badehotellet");

@@ -10,11 +10,12 @@ import java.util.Date;
 
 @Entity
 @Data
-public class Showtime {
+public class Showtime
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Temporal(TemporalType.TIMESTAMP)  // Timestamp includes date and time down to the second second.
+    @Temporal(TemporalType.TIMESTAMP)  // Timestamp includes date and time down to the second.
     private Date time_start;
 
     @ManyToOne  // Changed from @OneToOne

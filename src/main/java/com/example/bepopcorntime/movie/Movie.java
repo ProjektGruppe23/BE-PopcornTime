@@ -3,7 +3,6 @@ package com.example.bepopcorntime.movie;
 import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.movie_genre.MovieGenre;
 import com.example.bepopcorntime.showtime.Showtime;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,9 +12,10 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Movie {
-    @ManyToOne
-    @JoinColumn(name = "ageLimit", referencedColumnName = "id", nullable = false)
+public class Movie
+{
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ageLimit", referencedColumnName = "id")
     AgeLimit ageLimit;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,8 @@ public class Movie {
     private String picture;
     private int length;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
-    @JsonBackReference
     private Set<Showtime> showtimes = new HashSet<>();
 
     @OneToMany(mappedBy = "movie")
-    @JsonBackReference
     private Set<MovieGenre> movieGenres = new HashSet<>();
 }
