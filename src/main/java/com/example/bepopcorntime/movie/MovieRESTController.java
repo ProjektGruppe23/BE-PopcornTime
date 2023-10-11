@@ -26,11 +26,12 @@ public class MovieRESTController
     MovieGenreRepository movieGenreRepository;
 
 
-    /*@GetMapping("/movies")
+    @GetMapping("/allmovies")
     public List<Movie> getAllMovies()
     {
-        return movieRepository.findAll();
-    }*/
+        List<Movie> allMovies = movieRepository.findAll();
+        return allMovies;
+    }
 
     @GetMapping("/movies/current")
     public List<Movie> getCurrentMovies()
