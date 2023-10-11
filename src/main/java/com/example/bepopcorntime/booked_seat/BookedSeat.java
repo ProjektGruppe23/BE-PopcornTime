@@ -1,8 +1,8 @@
 package com.example.bepopcorntime.booked_seat;
 
 import com.example.bepopcorntime.booking.Booking;
-import com.example.bepopcorntime.seat.Seat;
 import com.example.bepopcorntime.showtime.Showtime;
+import com.example.bepopcorntime.theatre.Theatre;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,13 +20,15 @@ public class BookedSeat {
     @JsonBackReference(value = "booking-bookedSeat")
     private Booking booking;
 
-    @ManyToOne
-    @JoinColumn(name = "seat_id", nullable = false)
-    @JsonBackReference(value = "seat-bookedSeat")
-    private Seat seat;
+    private String seat;
 
     @ManyToOne
     @JoinColumn(name = "showtime_id", nullable = false)
     @JsonBackReference(value = "showtime-bookedSeat")
     private Showtime showtime;
+
+    /*@ManyToOne
+    @JoinColumn(name = "theatre_id", nullable = false)
+    @JsonBackReference(value = "theatre-bookedSeat")
+    private Theatre theatre;*/
 }

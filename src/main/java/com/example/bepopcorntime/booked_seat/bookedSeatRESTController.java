@@ -4,8 +4,6 @@ import com.example.bepopcorntime.booking.Booking;
 import com.example.bepopcorntime.booking.BookingRepository;
 import com.example.bepopcorntime.movie.Movie;
 import com.example.bepopcorntime.movie.MovieRESTController;
-import com.example.bepopcorntime.seat.Seat;
-import com.example.bepopcorntime.seat.SeatRepository;
 import com.example.bepopcorntime.showtime.Showtime;
 import com.example.bepopcorntime.showtime.ShowtimeRepository;
 import jakarta.servlet.http.HttpSession;
@@ -35,9 +33,6 @@ public class bookedSeatRESTController
     @Autowired
     BookingRepository bookingRepository;
 
-   @Autowired
-    SeatRepository seatRepository;
-
 
     @GetMapping("/getBookedSeats/{showtime_Id}")
     public ResponseEntity<List<BookedSeat>> getBookedSeats(@PathVariable int showtime_Id, HttpSession session)
@@ -57,7 +52,7 @@ public class bookedSeatRESTController
 
     @PostMapping("/getBookedSeats")
     public ResponseEntity<BookedSeat> postShowtimeIdAndSeatIdAndBookingId(@RequestParam(name = "email") String email,
-                                                                          @RequestParam(name = "arrayParam") List<Integer> seatIds,
+                                                                          @RequestParam(name = "arrayParam") List<String> seatIds,
                                                                           @RequestParam(name = "intParam") int showtimeId)
     {
         Booking booking = new Booking();
@@ -79,11 +74,11 @@ public class bookedSeatRESTController
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        for (Integer seatId : seatIds)
+        for (String seatId : seatIds)
         {
-            Seat seat = seatRepository.findById(seatId).orElse(null);
+            //String seat = bookedSeatRepository.findBySeat(seatId);
 
-            if (seatId == 0)
+            if (seatId == "")
             {
                 System.out.println("seat if");
                 // Handle the case where the seat with the given ID does not exist.
@@ -92,7 +87,7 @@ public class bookedSeatRESTController
 
             BookedSeat bookedSeat = new BookedSeat();
             bookedSeat.setBooking(booking);
-            bookedSeat.setSeat(seat);
+            bookedSeat.setSeat(seatId);
             bookedSeat.setShowtime(showtime);
             savedBookedSeat = bookedSeatRepository.save(bookedSeat);
 

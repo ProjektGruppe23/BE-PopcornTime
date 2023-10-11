@@ -8,5 +8,7 @@ public interface BookedSeatRepository extends JpaRepository<BookedSeat, Integer>
 {
     List<BookedSeat> findBookedSeatByShowtime_Id(int showtimeData);
 
+    String findBySeat(String seat);
+
 
 }
