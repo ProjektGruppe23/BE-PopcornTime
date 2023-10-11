@@ -31,8 +31,11 @@ public class MovieRESTController
     @GetMapping("/allmovies")
     public List<Movie> getAllMovies()
     {
-        List<Movie> allMovies = movieRepository.findAll();
+        List<Movie> allMovies = movieRepository.findIdAndTitleAndPicture();
         return allMovies;
+
+        /*List<Movie> allMovies = movieRepository.findAll();
+        return allMovies;*/
     }
 
     @GetMapping("/movies/current")
