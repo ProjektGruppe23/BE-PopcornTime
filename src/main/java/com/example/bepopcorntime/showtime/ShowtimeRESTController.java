@@ -69,7 +69,7 @@ public class ShowtimeRESTController {
         return showtimes;
     }
 
-    @GetMapping("oneshowtime/{showtimeId}")
+    @GetMapping("/oneshowtime/{showtimeId}")
     public ResponseEntity<Showtime> getOneShowtime(@PathVariable int showtimeId, HttpSession session)
     {
         Optional<Showtime> showtimeOpt = showtimeRepository.findShowtimeById(showtimeId);
