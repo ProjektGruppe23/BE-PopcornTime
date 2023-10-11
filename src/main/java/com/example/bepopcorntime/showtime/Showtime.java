@@ -22,18 +22,18 @@ public class Showtime {
     @Temporal(TemporalType.TIMESTAMP)  // Timestamp includes date and time down to the second second.
     private Date time_start;
 
-    @ManyToOne  // Changed from @OneToOne
+    @ManyToOne // Changed from @OneToOne
     @JoinColumn(name = "theatre_id") // Provide the actual column name in your database
-    @JsonBackReference(value = "theatre-showtime")
+    //@JsonBackReference(value = "theatre-showtime")
     private Theatre theatre;
 
     @ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference(value = "movie-showtime")
+    //@JsonBackReference(value = "movie-showtime")
     private Movie movie;
 
     @OneToMany
     @JoinColumn(name = "showtime_id", referencedColumnName = "id")
-    @JsonManagedReference(value = "showtime-bookedSeat")
+    //@JsonManagedReference(value = "showtime-bookedSeat")
     private Set<BookedSeat> bookedSeats = new HashSet<>();
 }
