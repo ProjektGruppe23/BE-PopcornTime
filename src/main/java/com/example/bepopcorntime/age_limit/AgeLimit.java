@@ -1,6 +1,7 @@
 package com.example.bepopcorntime.age_limit;
 
 import com.example.bepopcorntime.movie.Movie;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,6 +18,7 @@ public class AgeLimit
     private int age;
 
     @OneToMany(mappedBy = "ageLimit")
+    @JsonManagedReference(value = "ageLimit-movie")
     private Set<Movie> movies = new HashSet<>();
 
 }
