@@ -34,4 +34,15 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     @JsonManagedReference(value = "movie-genre")
     private Set<MovieGenre> movieGenres = new HashSet<>();
+
+    public Movie()
+    {
+    }
+
+    public Movie(int id, String title, String picture) // Constructor for the custom Query for the movie search in the navbar
+    {
+        this.id = id;
+        this.title = title;
+        this.picture = picture;
+    }
 }

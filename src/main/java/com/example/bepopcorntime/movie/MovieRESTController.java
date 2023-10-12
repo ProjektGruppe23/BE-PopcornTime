@@ -28,10 +28,10 @@ public class MovieRESTController
     AgeLimitRepository ageLimitRepository;
 
 
-    @GetMapping("/allmovies")
-    public List<Movie> getAllMovies()
+    @GetMapping("/allmovies") //Should be renamed to something like "/search" since this no longer gets everything from the movie table
+    public List<Movie> getAllMovies() //this should be renamed aswell
     {
-        List<Movie> allMovies = movieRepository.findAll();
+        List<Movie> allMovies = movieRepository.findIdAndTitleAndPicture(); //The method that uses the custom JPA query annotation is called here to be sent to the frontend with only the collums needed.
         return allMovies;
     }
 
