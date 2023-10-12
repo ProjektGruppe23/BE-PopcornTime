@@ -97,5 +97,31 @@ public class bookedSeatRESTController
         return new ResponseEntity<>(savedBookedSeat, HttpStatus.CREATED);
     }
 
+    @GetMapping("/bookingConfirmed")
+    public int getBookingId(@RequestParam(name = "email") String email, @RequestParam(name = "intParam") int showtimeId) throws Exception {
+        List<Booking> allBookingIdsByEmail = bookingRepository.findIdByEmail(email);
+
+        int foundBookingId = -99;
+
+        for (Booking bookingId : allBookingIdsByEmail) {
+            List<Integer> bookingIdForShowtime = bookedSeatRepository.findBookingIdByShowtimeId(showtimeId);
+
+            for(int i = 0; i<bookingIdForShowtime.size(); i++)
+            {
+                if (bookingIdForShowtime.get(i) == bookingId.getId()) {
+                    foundBookingId = bookingId.getId();
+                }
+
+            }
+        }
+
+
+        if (foundBookingId == -99) {
+            throw new Exception("Booking ID not found");
+        }
+
+        return foundBookingId;
+    }
+
 }
 
