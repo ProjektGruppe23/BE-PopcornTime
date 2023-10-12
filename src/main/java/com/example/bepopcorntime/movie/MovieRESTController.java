@@ -5,6 +5,7 @@ import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.age_limit.AgeLimitRepository;
 import com.example.bepopcorntime.movie_genre.MovieGenreRepository;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -72,6 +73,7 @@ public class MovieRESTController
         {
             if ( movie.getStartDate().compareTo(currentDate) > 0 )
             {
+                movie.setAgeLimitForDisplay(movie.ageLimit.getAge());
                 selectedMovies.add(movie);
             }
         }
@@ -132,8 +134,13 @@ public class MovieRESTController
     }
 
     @DeleteMapping("/movie/{id}")
-    public void deleteMovie(@PathVariable int id)
-    {
+    @Transactional  // Makes sure that all DB operations are part of a single transaction
+    public void deleteMovie(@PathVariable int id) {
+
+        // First delete the corresponding records in movie_genre table
+        movieGenreRepository.deleteByMovieId(id);
+
+        // Now it's safe to delete the Movie
         movieRepository.deleteById(id);
     }
 }
