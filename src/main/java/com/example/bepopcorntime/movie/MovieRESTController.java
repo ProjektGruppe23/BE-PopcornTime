@@ -36,6 +36,13 @@ public class MovieRESTController
         return allMovies;
     }
 
+    @GetMapping("/movies")
+    public List<Movie> getMovies()
+    {
+        List<Movie> movies = movieRepository.findAll();
+        return movies;
+    }
+
     @GetMapping("/movies/current")
     public List<Movie> getCurrentMovies()
     {
