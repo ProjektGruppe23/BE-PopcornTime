@@ -53,9 +53,11 @@ public class MovieRESTController
         {
             if ( movie.getStartDate().compareTo(currentDate) <= 0 )
             {
+                movie.setAgeLimitForDisplay(movie.ageLimit.getAge());
                 selectedMovies.add(movie);
             }
         }
+
 
         return selectedMovies;
     }

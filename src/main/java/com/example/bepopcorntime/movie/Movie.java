@@ -26,6 +26,7 @@ public class Movie
     private Date endDate;
     private String picture;
     private int length;
+    private transient int ageLimitForDisplay;
 
     @ManyToOne
     @JoinColumn(name = "ageLimit", referencedColumnName = "id", nullable = false)
