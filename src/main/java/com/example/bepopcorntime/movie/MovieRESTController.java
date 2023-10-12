@@ -132,15 +132,4 @@ public class MovieRESTController
         movie.setId(id);
         return movieRepository.save(movie);
     }
-
-    @DeleteMapping("/movie/{id}")
-    @Transactional  // Makes sure that all DB operations are part of a single transaction
-    public void deleteMovie(@PathVariable int id) {
-
-        // First delete the corresponding records in movie_genre table
-        movieGenreRepository.deleteByMovieId(id);
-
-        // Now it's safe to delete the Movie
-        movieRepository.deleteById(id);
-    }
 }

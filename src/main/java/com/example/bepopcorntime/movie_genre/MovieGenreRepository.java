@@ -6,5 +6,4 @@ import java.util.Optional;
 
 public interface MovieGenreRepository extends JpaRepository<MovieGenre, Integer>
 {
-    Optional<MovieGenre> deleteByMovieId(int id);
 }
