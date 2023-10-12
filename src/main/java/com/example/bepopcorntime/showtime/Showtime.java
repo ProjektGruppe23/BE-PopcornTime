@@ -1,11 +1,10 @@
 package com.example.bepopcorntime.showtime;
 
-
 import com.example.bepopcorntime.booked_seat.BookedSeat;
 import com.example.bepopcorntime.movie.Movie;
 import com.example.bepopcorntime.theatre.Theatre;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,7 +14,9 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Showtime {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Showtime
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -24,16 +25,13 @@ public class Showtime {
 
     @ManyToOne // Changed from @OneToOne
     @JoinColumn(name = "theatre_id") // Provide the actual column name in your database
-    //@JsonBackReference(value = "theatre-showtime")
     private Theatre theatre;
 
     @ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "id", nullable = false)
-    //@JsonBackReference(value = "movie-showtime")
     private Movie movie;
 
     @OneToMany
     @JoinColumn(name = "showtime_id", referencedColumnName = "id")
-    //@JsonManagedReference(value = "showtime-bookedSeat")
     private Set<BookedSeat> bookedSeats = new HashSet<>();
 }

@@ -5,6 +5,7 @@ import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.age_limit.AgeLimitRepository;
 import com.example.bepopcorntime.movie_genre.MovieGenreRepository;
 import jakarta.servlet.http.HttpSession;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -81,6 +82,7 @@ public class MovieRESTController
     public ResponseEntity<Movie> getSelectedMovie(@PathVariable int movieId, HttpSession session)
     {
         Optional<Movie> movieOpt = movieRepository.findById(movieId);
+
 
         if ( movieOpt.isPresent() )
         {

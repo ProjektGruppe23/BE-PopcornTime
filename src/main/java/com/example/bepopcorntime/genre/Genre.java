@@ -1,7 +1,8 @@
 package com.example.bepopcorntime.genre;
 
 import com.example.bepopcorntime.movie_genre.MovieGenre;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,7 +11,9 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Genre {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Genre
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +21,5 @@ public class Genre {
     private String type;
 
     @OneToMany(mappedBy = "genre")
-    @JsonManagedReference(value = "genre-movieGenre")
     private Set<MovieGenre> movieGenres = new HashSet<>();
 }
