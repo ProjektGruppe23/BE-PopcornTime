@@ -3,8 +3,8 @@ package com.example.bepopcorntime.movie;
 import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.movie_genre.MovieGenre;
 import com.example.bepopcorntime.showtime.Showtime;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,6 +14,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Movie
 {
     @Id
@@ -31,10 +32,8 @@ public class Movie
     AgeLimit ageLimit;
 
     @OneToMany(mappedBy = "movie")
-    @JsonManagedReference(value = "movie-showtime")
     private Set<Showtime> showtimes = new HashSet<>();
 
     @OneToMany(mappedBy = "movie")
-    @JsonManagedReference(value = "movie-genre")
     private Set<MovieGenre> movieGenres = new HashSet<>();
 }

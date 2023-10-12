@@ -1,9 +1,8 @@
 package com.example.bepopcorntime.theatre;
 
-
-import com.example.bepopcorntime.booked_seat.BookedSeat;
 import com.example.bepopcorntime.showtime.Showtime;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,7 +11,9 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Theatre {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Theatre
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -21,10 +22,5 @@ public class Theatre {
     private String name;
 
     @OneToMany(mappedBy = "theatre")  // Changed from @OneToOne
-    @JsonManagedReference(value = "theatre-showtime")
     private Set<Showtime> showtimes = new HashSet<>();
-
-    /*@OneToMany(mappedBy = "theatre")
-    @JsonManagedReference(value = "theatre-bookedSeat")
-    private Set<BookedSeat> seats = new HashSet<>();*/
 }
