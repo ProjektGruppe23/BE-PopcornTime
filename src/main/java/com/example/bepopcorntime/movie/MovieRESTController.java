@@ -56,8 +56,6 @@ public class MovieRESTController
                 selectedMovies.add(movie);
             }
         }
-
-
         return selectedMovies;
     }
 
