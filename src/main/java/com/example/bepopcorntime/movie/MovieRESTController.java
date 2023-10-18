@@ -1,12 +1,17 @@
 package com.example.bepopcorntime.movie;
 
 
+import com.example.bepopcorntime.age_limit.AgeLimit;
 import com.example.bepopcorntime.age_limit.AgeLimitRepository;
 import com.example.bepopcorntime.movie_genre.MovieGenreRepository;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -25,6 +30,8 @@ public class MovieRESTController
 
     @Autowired
     AgeLimitRepository ageLimitRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(MovieRESTController.class);
 
 
     @GetMapping("/allmovies")
@@ -115,12 +122,28 @@ public class MovieRESTController
     @PostMapping("/movie")
     public Movie createMovie(@RequestBody Movie movie)
     {
+        logger.info("Received movie data for creation: {}", movie); // Debugging line
+
+        // Fetch the existing AgeLimit from the database using the id provided
+        Optional<AgeLimit> existingAgeLimit = ageLimitRepository.findById(movie.getAgeLimit().getId());
+
+        if (existingAgeLimit.isPresent())
+        {
+            // If found, set the complete AgeLimit object to movie
+            movie.setAgeLimit(existingAgeLimit.get());
+        }
+        else
+        {
+            // Handle error by throwing an exception
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "AgeLimit with the given ID not found");
+        }
         return movieRepository.save(movie);
     }
 
     @PutMapping("/movie/{id}")
     public Movie updateMovie(@PathVariable int id, @RequestBody Movie movie)
     {
+        logger.info("Received movie data for update: {}", movie); // Debugging line
         movie.setId(id);
         return movieRepository.save(movie);
     }
