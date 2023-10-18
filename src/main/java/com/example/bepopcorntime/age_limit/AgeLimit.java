@@ -20,6 +20,5 @@ public class AgeLimit {
 
     @OneToMany(mappedBy = "ageLimit")
     private Set<Movie> movies = new HashSet<>();
-
 }
 

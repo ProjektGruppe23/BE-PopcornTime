@@ -28,7 +28,7 @@ public class Movie
     private int length;
     private transient int ageLimitForDisplay;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ageLimit", referencedColumnName = "id", nullable = false)
     AgeLimit ageLimit;
 
