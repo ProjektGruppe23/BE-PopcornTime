@@ -2,19 +2,17 @@ package com.example.bepopcorntime.booked_seat;
 
 import com.example.bepopcorntime.booking.Booking;
 import com.example.bepopcorntime.booking.BookingRepository;
-import com.example.bepopcorntime.movie.Movie;
 import com.example.bepopcorntime.movie.MovieRESTController;
 import com.example.bepopcorntime.showtime.Showtime;
 import com.example.bepopcorntime.showtime.ShowtimeRepository;
 import jakarta.servlet.http.HttpSession;
-import org.apache.tomcat.util.http.parser.HttpParser;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -38,8 +36,8 @@ public class bookedSeatRESTController
     public ResponseEntity<List<BookedSeat>> getBookedSeats(@PathVariable int showtime_Id, HttpSession session)
     {
         Optional<Showtime> showtimeOpt = showtimeRepository.findShowtimeById(showtime_Id);
-        
-        if(showtimeOpt.isPresent())
+
+        if ( showtimeOpt.isPresent() )
         {
             Showtime showtime = showtimeOpt.get();
             session.setAttribute("movieId", showtime.getMovie().getId());
@@ -66,19 +64,18 @@ public class bookedSeatRESTController
         Showtime showtime = showtimeRepository.findById(showtimeId).orElse(null);
 
 
-
-        if (showtimeId == 0)
+        if ( showtimeId == 0 )
         {
             System.out.println("showtime if");
             // Handle the case where the showtime with the given ID does not exist.
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        for (String seatId : seatIds)
+        for ( String seatId : seatIds )
         {
             //String seat = bookedSeatRepository.findBySeat(seatId);
 
-            if (seatId == "")
+            if ( seatId == "" )
             {
                 System.out.println("seat if");
                 // Handle the case where the seat with the given ID does not exist.
@@ -98,25 +95,30 @@ public class bookedSeatRESTController
     }
 
     @GetMapping("/bookingConfirmed")
-    public int getBookingId(@RequestParam(name = "email") String email, @RequestParam(name = "intParam") int showtimeId) throws Exception {
+    public int getBookingId(@RequestParam(name = "email") String email, @RequestParam(name = "intParam") int showtimeId) throws Exception
+    {
         List<Booking> allBookingIdsByEmail = bookingRepository.findIdByEmail(email);
 
         int foundBookingId = -99;
 
-        for (Booking bookingId : allBookingIdsByEmail) {
+        for ( Booking bookingId : allBookingIdsByEmail )
+        {
             List<Integer> bookingIdForShowtime = bookedSeatRepository.findBookingIdByShowtimeId(showtimeId);
 
-            for(int i = 0; i<bookingIdForShowtime.size(); i++)
+            for ( int i = 0; i < bookingIdForShowtime.size(); i++ )
             {
-                if (bookingIdForShowtime.get(i) == bookingId.getId()) {
+                if ( bookingIdForShowtime.get(i) == bookingId.getId() )
+                {
                     foundBookingId = bookingId.getId();
+                    break;
                 }
 
             }
         }
 
 
-        if (foundBookingId == -99) {
+        if ( foundBookingId == -99 )
+        {
             throw new Exception("Booking ID not found");
         }
 

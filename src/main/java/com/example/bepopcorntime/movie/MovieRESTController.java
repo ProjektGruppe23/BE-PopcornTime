@@ -22,17 +22,13 @@ import java.util.Optional;
 @CrossOrigin
 public class MovieRESTController
 {
+    private static final Logger logger = LoggerFactory.getLogger(MovieRESTController.class);
     @Autowired
     MovieRepository movieRepository;
-
     @Autowired
     MovieGenreRepository movieGenreRepository;
-
     @Autowired
     AgeLimitRepository ageLimitRepository;
-
-    private static final Logger logger = LoggerFactory.getLogger(MovieRESTController.class);
-
 
     @GetMapping("/allmovies")
     //Should be renamed to something like "/search" since this no longer gets everything from the movie table
@@ -127,7 +123,7 @@ public class MovieRESTController
         // Fetch the existing AgeLimit from the database using the id provided
         Optional<AgeLimit> existingAgeLimit = ageLimitRepository.findById(movie.getAgeLimit().getId());
 
-        if (existingAgeLimit.isPresent())
+        if ( existingAgeLimit.isPresent() )
         {
             // If found, set the complete AgeLimit object to movie
             movie.setAgeLimit(existingAgeLimit.get());

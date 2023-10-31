@@ -1,4 +1,5 @@
 package com.example.bepopcorntime.booked_seat;
+
 import com.example.bepopcorntime.booking.Booking;
 import com.example.bepopcorntime.showtime.Showtime;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

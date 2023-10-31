@@ -1,10 +1,8 @@
 package com.example.bepopcorntime.showtime;
 
-import com.example.bepopcorntime.booked_seat.BookedSeat;
 import com.example.bepopcorntime.movie.Movie;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin
-public class ShowtimeRESTController {
+public class ShowtimeRESTController
+{
     @Autowired
     ShowtimeRepository showtimeRepository;
 
@@ -51,11 +49,13 @@ public class ShowtimeRESTController {
     }*/
 
     @GetMapping("/showtimes/{movieid}")
-    public List<Showtime> getShowtimesByMovieId(@PathVariable int movieid, HttpSession session) {
+    public List<Showtime> getShowtimesByMovieId(@PathVariable int movieid, HttpSession session)
+    {
         List<Showtime> showtimesByMovie = showtimeRepository.findShowtimesByMovieId(movieid);
         List<Showtime> showtimes = new ArrayList<>();
 
-        for (Showtime showtime : showtimesByMovie) {
+        for ( Showtime showtime : showtimesByMovie )
+        {
             // Assuming showtime already contains a reference to the associated Movie
             Movie movie = showtime.getMovie();
 
@@ -74,7 +74,7 @@ public class ShowtimeRESTController {
     {
         Optional<Showtime> showtimeOpt = showtimeRepository.findShowtimeById(showtimeId);
 
-        if (showtimeOpt.isPresent())
+        if ( showtimeOpt.isPresent() )
         {
             Showtime showtime = showtimeOpt.get();
             session.setAttribute("showtimeId", showtime.getId());
@@ -85,5 +85,5 @@ public class ShowtimeRESTController {
             return ResponseEntity.notFound().build();
         }
     }
-    
+
 }

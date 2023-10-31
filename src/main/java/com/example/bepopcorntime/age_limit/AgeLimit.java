@@ -12,7 +12,8 @@ import java.util.Set;
 @Entity
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class AgeLimit {
+public class AgeLimit
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

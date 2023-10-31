@@ -17,6 +17,9 @@ import java.util.Set;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Movie
 {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ageLimit", referencedColumnName = "id", nullable = false)
+    AgeLimit ageLimit;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,11 +30,6 @@ public class Movie
     private String picture;
     private int length;
     private transient int ageLimitForDisplay;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ageLimit", referencedColumnName = "id", nullable = false)
-    AgeLimit ageLimit;
-
     @OneToMany(mappedBy = "movie")
     private Set<Showtime> showtimes = new HashSet<>();
 
